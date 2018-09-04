@@ -1,3 +1,4 @@
 Dockerfile
 docker-compose.yml
 local_php.ini
+local.sh
