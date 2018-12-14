@@ -29,18 +29,25 @@ class WorkbenchConfig {
     function __construct() {
         // initialize in case load issues
         $config = array();
-
+        
         //load default config values
-        require 'defaults.php';
+        if($_ENV['USER_TYPE'] === 'internal'){
+            require 'internal/defaults.php';
+        } else {
+            require 'defaults.php';
+        }
+        
 
         // load file-based config overrides
-        if (is_file('config/overrides.php')) {
+        if (is_file('config/overrides.php') && $_ENV['USER_TYPE'] === 'internal') {
+            require 'internal/overrides.php';
+        } else {
             /** @noinspection PhpIncludeInspection */
             require 'config/overrides.php';
         }
 
         // load legecy file-based config-overrides
-        if (is_file('configOverrides.php')) {
+        if (is_file('configOverrides.php') && $_ENV['USER_TYPE'] === 'internal') {
             /** @noinspection PhpIncludeInspection */
             require 'configOverrides.php';
         }
