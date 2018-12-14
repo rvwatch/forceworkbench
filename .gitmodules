@@ -1,0 +1,3 @@
+[submodule "workbench/internal"]
+	path = workbench/internal
+	url = git@git.soma.salesforce.com:ricardo-viera/internal-test.git

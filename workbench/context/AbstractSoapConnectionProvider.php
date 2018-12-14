@@ -11,7 +11,8 @@ abstract class AbstractSoapConnectionProvider extends AbstractConnectionProvider
     protected abstract function getWsdlType();
 
     protected function buildWsdlPath(ConnectionConfiguration $connConfig) {
-        return "soapclient/sforce." .
+        $wsdlPath = $_ENV['USER_TYPE'] === 'internal' ? "internal/soapclient/sforce." : "soapclient/sforce.";
+        return $wsdlPath .
                str_replace(".", "", max($this->getMinWsdlVersion(), $connConfig->getApiVersion())) .
                "." . $this->getWsdlType() . ".wsdl";
     }
